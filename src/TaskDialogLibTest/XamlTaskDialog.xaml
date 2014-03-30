@@ -1,0 +1,66 @@
+﻿<!--================================================================================================
+
+  TaskDialog Library
+  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+
+  File:
+    XamlTaskDialog.xaml
+  Purpose:
+    Test task dialog XAML markup.
+  Authors:
+    Florian Schneidereit <florian.schneidereit@outlook.com>
+
+  This library is free software; you can redistribute it and/or modify it under the terms of
+  the GNU Lesser General Public License as published by the Free Software Foundation; either
+  version 2.1 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Lesser General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public License along with this
+  library; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+  Boston, MA  02110-1301  USA
+
+=================================================================================================-->
+<TaskDialog x:Class="TaskDialogLibTest.XamlTaskDialog"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns="http://github.com/sevenacids/TaskDialogLib"
+            Title="XAML Task Dialog"
+            Instruction="Lorem ipsum dolor sit amet"
+            DefaultIcon="Information"
+            CommonButtons="Yes,No,Cancel"
+            ButtonStyle="CommandLinks"
+            EnableHyperlinks="True"
+            VerificationText="Lorem ipsum dolor sit amet."
+            FooterIcon="Resources/Warning.ico">
+    <TaskDialog.Content>
+        <TaskDialogText>
+            <TaskDialogLink Uri="http://www.example.com">Lorem ipsum</TaskDialogLink> dolor sit
+            amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+            dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
+            dolor sit amet.
+        </TaskDialogText>
+    </TaskDialog.Content>
+    <TaskDialog.ExpandedInformation>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+    </TaskDialog.ExpandedInformation>
+    <TaskDialog.Footer>
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+        invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+    </TaskDialog.Footer>
+    <TaskDialog.Buttons>
+        <TaskDialogButton Title="Button 1" Description="Lorem ipsum dolor sit amet." />
+        <TaskDialogButton Title="Button 2" Description="Lorem ipsum dolor sit amet." />
+    </TaskDialog.Buttons>
+    <TaskDialog.RadioButtons>
+        <TaskDialogRadioButton Title="Radio Button 1" />
+        <TaskDialogRadioButton Title="Radio Button 2" />
+        <TaskDialogRadioButton Title="Radio Button 3" />
+    </TaskDialog.RadioButtons>
+    <TaskDialog.ProgressBar>
+        <TaskDialogProgressBar Style="Marquee" RunMarquee="True" />
+    </TaskDialog.ProgressBar>
+</TaskDialog>
