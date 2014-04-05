@@ -8,6 +8,9 @@ The TaskDialogLib is a thin wrapper library of the [Task Dialog Common Control](
 [Official Git Repository](http://github.com/sevenacids/TaskDialogLib)  
 [Official NuGet Package](http://www.nuget.org/packages/TaskDialogLib)
 
+For a quick walkthrough how to use this library, see the CodeProject article:  
+[Introducing TaskDialogLib: Task Dialogs in XAML](http://www.codeproject.com/Articles/751921/Introducing-TaskDialogLib-Task-Dialogs-in-XAML)
+
 ## Requirements ##
 To build and use the TaskDialogLib, the following system requirements must be met:
 
@@ -36,4 +39,4 @@ The TaskDialogLib can be build using the supplied command-line script files loca
 The TaskDialogLib is licensed and distributed under the terms of the GNU Lesser General Public License (LGPL), version 2.1. For more information, please see the file "License.txt" in the root of this distribution or visit <http://www.gnu.org/licenses/>.
 
 ----------
-<small>File: ReadMe.md, Last Update: March 30, 2014</small>
+<small>File: ReadMe.md, Last Update: April 5, 2014</small>
