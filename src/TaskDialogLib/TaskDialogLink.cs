@@ -66,9 +66,9 @@ namespace TaskDialogLib
 		}
 
 		/// <summary>
-		/// 
+		/// Initializes a new instance of the TaskDialogLink class with the specified text.
 		/// </summary>
-		/// <param name="text"></param>
+		/// <param name="text">A <see cref="String"/> that represents the link text.</param>
 		public TaskDialogLink(String text)
 		{
 			// Initialize instance
@@ -76,10 +76,10 @@ namespace TaskDialogLib
 		}
 
 		/// <summary>
-		/// 
+		/// Initializes a new instance of the TaskDialogLink class with the specified text and URI.
 		/// </summary>
-		/// <param name="text"></param>
-		/// <param name="uri"></param>
+		/// <param name="text">A <see cref="String"/> that represent the link text.</param>
+		/// <param name="uri">A <see cref="Uri"/> that represents the link URI.</param>
 		public TaskDialogLink(String text, Uri uri)
 		{
 			// Initialize instance

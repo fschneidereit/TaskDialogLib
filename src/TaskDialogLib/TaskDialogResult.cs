@@ -34,10 +34,10 @@ using System.Runtime.InteropServices;
 namespace TaskDialogLib
 {
 	/// <summary>
-	/// Represents the result of a <see cref="TaskDialog"/>.
+	/// Represents the result of a <see cref="TaskDialog"/> user interaction.
 	/// </summary>
 	[StructLayout(LayoutKind.Sequential)]
-	public struct TaskDialogResult
+	public struct TaskDialogResult : IEquatable<TaskDialogResult>
 	{
 		internal static readonly TaskDialogResult Empty;
 
@@ -75,21 +75,23 @@ namespace TaskDialogLib
 		#region Properties
 
 		/// <summary>
-		/// 
+		/// Gets either the zero-based index of the <see cref="TaskDialogButton"/> or a value that
+		/// indicates which <see cref="TaskDialogButtons"/> common button was selected.
 		/// </summary>
 		public Int32 SelectedButton {
 			get { return selectedButton; }
 		}
 
 		/// <summary>
-		/// 
+		/// Gets the zero-based index of the <see cref="TaskDialogRadioButton"/> that was selected.
 		/// </summary>
 		public Int32 SelectedRadioButton {
 			get { return selectedRadioButton; }
 		}
 
 		/// <summary>
-		/// 
+		/// Determines whether the verification checkbox of the <see cref="TaskDialog"/> was in a
+		/// checked state.
 		/// </summary>
 		public Boolean VerificationChecked {
 			get { return verificationChecked; }
@@ -97,17 +99,110 @@ namespace TaskDialogLib
 
 		#endregion
 
+		#region Methods
+
+		/// <summary>
+		/// Determines whether the specified <see cref="TaskDialogResult"/> is equal to the current
+		/// instance.
+		/// </summary>
+		/// <param name="obj">The <see cref="TaskDialogResult"/> to compare with the current
+		/// instance.</param>
+		/// <returns>True if <paramref name="obj"/> is equal to the current instance; otherwise,
+		/// False.</returns>
+		public Boolean Equals(TaskDialogResult obj)
+		{
+			return Equals(this, obj);
+		}
+
+		#endregion
+
 		#region Methods: Overridden
 
 		/// <summary>
-		/// 
+		/// Determines whether the specified <see cref="Object"/> is a <see cref="TaskDialogResult"/>
+		/// value and equal to the current instance.
 		/// </summary>
-		/// <returns></returns>
+		/// <param name="obj">The <see cref="Object"/> to compare with the current instance.
+		/// </param>
+		/// <returns>True if <paramref name="obj"/> is equal to the current instance; otherwise,
+		/// False.</returns>
+		public override Boolean Equals(Object obj)
+		{
+			if (obj != null) {
+				if (obj is TaskDialogResult) {
+					return Equals((TaskDialogResult)obj);
+				}
+			}
+
+			return false;
+		}
+
+		/// <summary>
+		/// Generates a hash code for this <see cref="TaskDialogResult"/>.
+		/// </summary>
+		/// <returns>A <see cref="Int32"/> that represents the hash code of this instance.</returns>
+		public override Int32 GetHashCode()
+		{
+			return SelectedButton.GetHashCode() ^
+				   SelectedRadioButton.GetHashCode() ^
+				   VerificationChecked.GetHashCode();
+		}
+
+		/// <summary>
+		/// Returns a string representation of this <see cref="TaskDialogResult"/>.
+		/// </summary>
+		/// <returns>A <see cref="String"/> that represents this instance.</returns>
 		public override String ToString()
 		{
 			return String.Format("TaskDialogResult {{ SelectedButton = {0}, " +
 								 "SelectedRadioButton = {1}, VerificationChecked = {2} }}",
 								 SelectedButton, SelectedRadioButton, VerificationChecked);
+		}
+
+		#endregion
+
+		#region Methods: Static
+
+		/// <summary>
+		/// Determines whether two <see cref="TaskDialogResult"/> instances are equal.
+		/// </summary>
+		/// <param name="objA">The first <see cref="TaskDialogResult"/> instance to compare.</param>
+		/// <param name="objB">The second <see cref="TaskDialogResult"/> instance to compare.</param>
+		/// <returns>True if <paramref name="objA"/> and <paramref name="objB"/> represent the
+		/// same values; otherwise, False.</returns>
+		public static Boolean Equals(TaskDialogResult objA, TaskDialogResult objB)
+		{
+			return objA == objB;
+		}
+
+		#endregion
+
+		#region Operators
+
+		/// <summary>
+		/// Determines whether two <see cref="TaskDialogResult"/> instances are equal.
+		/// </summary>
+		/// <param name="objA">The first <see cref="TaskDialogResult"/> instance to compare.</param>
+		/// <param name="objB">The second <see cref="TaskDialogResult"/> instance to compare.</param>
+		/// <returns>True if <paramref name="objA"/> and <paramref name="objB"/> represent the
+		/// same values; otherwise, False.</returns>
+		public static Boolean operator ==(TaskDialogResult objA, TaskDialogResult objB)
+		{
+			return objA.SelectedButton == objB.SelectedButton &&
+				   objA.SelectedRadioButton == objB.SelectedRadioButton &&
+				   objA.VerificationChecked == objB.VerificationChecked;
+		}
+
+		/// <summary>
+		/// Determines whether two <see cref="TaskDialogResult"/> instances are not equal.
+		/// </summary>
+		/// <param name="objA">The first <see cref="TaskDialogResult"/> instance to compare.</param>
+		/// <param name="objB">The second <see cref="TaskDialogResult"/> instance to compare.</param>
+		/// <returns>True if <paramref name="objA"/> and <paramref name="objB"/> do not represent
+		/// the same values; otherwise, False.</returns>
+		public static Boolean operator !=(TaskDialogResult objA, TaskDialogResult objB)
+		{
+			return !(objA == objB);
 		}
 
 		#endregion

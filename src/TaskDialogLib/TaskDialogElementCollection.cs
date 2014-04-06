@@ -50,7 +50,7 @@ namespace TaskDialogLib
 		#region Constructors
 
 		/// <summary>
-		/// 
+		/// Initializes a new instance of the TaskDialogElementCollection class.
 		/// </summary>
 		public TaskDialogElementCollection()
 		{
@@ -70,14 +70,15 @@ namespace TaskDialogLib
 		#region Properties
 
 		/// <summary>
-		/// 
+		/// Gets the number of <see cref="TaskDialogElement"/> instances contained in this
+		/// <see cref="TaskDialogElementCollection{T}"/>.
 		/// </summary>
 		public Int32 Count {
 			get { return items.Count; }
 		}
 
 		/// <summary>
-		/// 
+		/// Indicates whether this <see cref="TaskDialogElementCollection{T}"/> is read-only.
 		/// </summary>
 		public Boolean IsReadOnly {
 			get { return false; }
@@ -88,9 +89,11 @@ namespace TaskDialogLib
 		#region Methods
 
 		/// <summary>
-		/// 
+		/// Adds a <see cref="TaskDialogElement"/> instance to this
+		/// <see cref="TaskDialogElementCollection{T}"/>.
 		/// </summary>
-		/// <param name="item"></param>
+		/// <param name="item">The <see cref="TaskDialogElement"/> instance to add to this
+		/// <see cref="TaskDialogElementCollection{T}"/>.</param>
 		public void Add(T item)
 		{
 			// Add to collection
@@ -98,7 +101,8 @@ namespace TaskDialogLib
 		}
 
 		/// <summary>
-		/// 
+		/// Removes all <see cref="TaskDialogElement"/> instances from this
+		/// <see cref="TaskDialogElementCollection{T}"/>.
 		/// </summary>
 		public void Clear()
 		{
@@ -106,39 +110,52 @@ namespace TaskDialogLib
 		}
 
 		/// <summary>
-		/// 
+		/// Determines whether this <see cref="TaskDialogElementCollection{T}"/> contains a specific
+		/// <see cref="TaskDialogElement"/> instance. 
 		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
+		/// <param name="item">The <see cref="TaskDialogElement"/> instance to locate.</param>
+		/// <returns>True if <paramref name="item"/> is found in this
+		/// <see cref="TaskDialogElementCollection{T}"/>; otherwise, False.</returns>
 		public Boolean Contains(T item)
 		{
 			return items.Contains(item);
 		}
 
 		/// <summary>
-		/// 
+		/// Copies the <see cref="TaskDialogElement"/> instances of this
+		/// <see cref="TaskDialogElementCollection{T}"/> to an array, starting at the specified
+		/// index.
 		/// </summary>
-		/// <param name="array"></param>
-		/// <param name="index"></param>
+		/// <param name="array">A one-dimensional, zero-based <see cref="TaskDialogElement"/> array
+		/// that is the destination of the TaskDialog instances copied from this 
+		/// <see cref="TaskDialogElementCollection{T}"/>.
+		/// </param>
+		/// <param name="index">A <see cref="Int32"/> that specifies the zero-based index in
+		/// <paramref name="array"/> at which copying begins.</param>
 		public void CopyTo(T[] array, Int32 index)
 		{
 			items.CopyTo(array, index);
 		}
 
 		/// <summary>
-		/// 
+		/// Returns an enumerator that iterates through this
+		/// <see cref="TaskDialogElementCollection{T}"/>.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through this
+		/// <see cref="TaskDialogCollection"/>.</returns>
 		public IEnumerator<T> GetEnumerator()
 		{
 			return items.GetEnumerator();
 		}
 
 		/// <summary>
-		/// 
+		/// Removes the first occurence of a <see cref="TaskDialogElement"/> instance from this
+		/// <see cref="TaskDialogElementCollection{T}"/>.
 		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
+		/// <param name="item">The <see cref="TaskDialogElement"/> instance to remove from this
+		/// <see cref="TaskDialogElementCollection{T}"/>.</param>
+		/// <returns>True if <paramref name="item"/> was removed from the current instance;
+		/// otherwise, False.</returns>
 		public Boolean Remove(T item)
 		{
 			return items.Remove(item);
@@ -149,10 +166,13 @@ namespace TaskDialogLib
 		#region Methods: Implementation
 
 		/// <summary>
-		/// 
+		/// This method is implementation-specific and not intended to be used from third-party
+		/// code.
 		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
+		/// <param name="item">This argument is implementation-specific and not intended to be used
+		/// from third-party code.</param>
+		/// <returns>The return value is implementation-specific and not intended to be used from
+		/// third-party code.</returns>
 		protected internal virtual Int32 AddInternal(Object item)
 		{
 			return ((IList)items).Add(item);

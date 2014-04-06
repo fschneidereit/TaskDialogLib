@@ -35,7 +35,7 @@ using System.Collections.Generic;
 namespace TaskDialogLib
 {
 	/// <summary>
-	/// 
+	/// Represents a collection of <see cref="TaskDialog"/> instances.
 	/// </summary>
 	public class TaskDialogCollection : IList, ICollection<TaskDialog>
 	{
@@ -48,7 +48,7 @@ namespace TaskDialogLib
 		#region Constructors
 
 		/// <summary>
-		/// 
+		/// Initializes a new instance of the TaskDialogCollection class. 
 		/// </summary>
 		public TaskDialogCollection()
 		{
@@ -61,14 +61,15 @@ namespace TaskDialogLib
 		#region Properties
 
 		/// <summary>
-		/// 
+		/// Gets the number of <see cref="TaskDialog"/> instances contained in this
+		/// <see cref="TaskDialogCollection"/>.
 		/// </summary>
 		public Int32 Count {
 			get { return items.Count; }
 		}
 
 		/// <summary>
-		/// 
+		/// Indicates whether this <see cref="TaskDialogCollection"/> is read-only.
 		/// </summary>
 		public Boolean IsReadOnly {
 			get { return ((ICollection<TaskDialog>)items).IsReadOnly; }
@@ -79,16 +80,18 @@ namespace TaskDialogLib
 		#region Methods
 
 		/// <summary>
-		/// 
+		/// Adds a <see cref="TaskDialog"/> instance to this <see cref="TaskDialogCollection"/>.
 		/// </summary>
-		/// <param name="item"></param>
+		/// <param name="item">The <see cref="TaskDialog"/> instance to add to this
+		/// <see cref="TaskDialogCollection"/>.</param>
 		public void Add(TaskDialog item)
 		{
 			items.Add(item);
 		}
 
 		/// <summary>
-		/// 
+		/// Removes all <see cref="TaskDialog"/> instances from this
+		/// <see cref="TaskDialogCollection"/>.
 		/// </summary>
 		public void Clear()
 		{
@@ -96,39 +99,49 @@ namespace TaskDialogLib
 		}
 
 		/// <summary>
-		/// 
+		/// Determines whether this <see cref="TaskDialogCollection"/> contains a specific
+		/// <see cref="TaskDialog"/> instance. 
 		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
+		/// <param name="item">The <see cref="TaskDialog"/> instance to locate.</param>
+		/// <returns>True if <paramref name="item"/> is found in this TaskDialogCollection;
+		/// otherwise, False.</returns>
 		public Boolean Contains(TaskDialog item)
 		{
 			return items.Contains(item);
 		}
 
 		/// <summary>
-		/// 
+		/// Copies the <see cref="TaskDialog"/> instances of this <see cref="TaskDialogCollection"/>
+		/// to an array, starting at the specified index.
 		/// </summary>
-		/// <param name="array"></param>
-		/// <param name="index"></param>
+		/// <param name="array">A one-dimensional, zero-based <see cref="TaskDialog"/> array that
+		/// is the destination of the TaskDialog instances copied from this TaskDialogCollection.
+		/// </param>
+		/// <param name="index">A <see cref="Int32"/> that specifies the zero-based index in
+		/// <paramref name="array"/> at which copying begins.</param>
 		public void CopyTo(TaskDialog[] array, Int32 index)
 		{
 			items.CopyTo(array, index);
 		}
 
 		/// <summary>
-		/// 
+		/// Returns an enumerator that iterates through this <see cref="TaskDialogCollection"/>.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through this
+		/// <see cref="TaskDialogElementCollection{T}"/>.</returns>
 		public IEnumerator<TaskDialog> GetEnumerator()
 		{
 			return items.GetEnumerator();
 		}
 
 		/// <summary>
-		/// 
+		/// Removes the first occurence of a <see cref="TaskDialog"/> instance from this
+		/// <see cref="TaskDialogCollection"/>.
 		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
+		/// <param name="item">The <see cref="TaskDialog"/> instance to remove from this
+		/// TaskDialogCollection.</param>
+		/// <returns>True if <paramref name="item"/> was removed from the current instance;
+		/// otherwise, False.</returns>
 		public Boolean Remove(TaskDialog item)
 		{
 			return items.Remove(item);

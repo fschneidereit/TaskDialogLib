@@ -28,7 +28,6 @@
 
 using System;
 using System.Text;
-using System.Windows;
 using System.Windows.Markup;
 
 #endregion
@@ -70,10 +69,13 @@ namespace TaskDialogLib
 		#region Methods: Overridden
 
 		/// <summary>
-		/// 
+		/// This method is implementation-specific and not intended to be used from third-party
+		/// code.
 		/// </summary>
-		/// <param name="item"></param>
-		/// <returns></returns>
+		/// <param name="item">This argument is implementation-specific and not intended to be used
+		/// from third-party code.</param>
+		/// <returns>The return value is implementation-specific and not intended to be used from
+		/// third-party code.</returns>
 		protected internal override Int32 AddInternal(Object item)
 		{
 			if (item is String) {

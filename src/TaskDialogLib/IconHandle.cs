@@ -38,9 +38,6 @@ namespace TaskDialogLib
 {
 	sealed class IconHandle : SafeHandle
 	{
-		/// <summary>
-		/// 
-		/// </summary>
 		public static readonly IconHandle Invalid = new IconHandle();
 
 		#region Constructors
@@ -58,9 +55,6 @@ namespace TaskDialogLib
 
 		#region Properties
 
-		/// <summary>
-		/// 
-		/// </summary>
 		public IntPtr Value {
 			get { return handle; }
 		}
@@ -69,9 +63,6 @@ namespace TaskDialogLib
 
 		#region Properties: Overridden
 
-		/// <summary>
-		/// 
-		/// </summary>
 		public override Boolean IsInvalid {
 			get { return handle == IntPtr.Zero; }
 		}
@@ -80,10 +71,6 @@ namespace TaskDialogLib
 
 		#region Methods: Overridden
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
 		protected override Boolean ReleaseHandle()
 		{
 			return NativeMethods.DestroyIcon(handle);
@@ -93,11 +80,6 @@ namespace TaskDialogLib
 
 		#region Methods: Static
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="imageSource"></param>
-		/// <returns></returns>
 		public static IconHandle Create(ImageSource imageSource)
 		{
 			IconHandle result = IconHandle.Invalid;
