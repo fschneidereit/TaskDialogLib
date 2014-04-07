@@ -1,7 +1,7 @@
 # TaskDialogLib #
 <strong>A free and open source library for XAML-based Task Dialogs.</strong>
 
-<small>Copyright &copy; 2014 Florian Schneidereit. All Rights Reserved.</small>
+<small>Copyright &copy; 2014 Flatcode.net. All Rights Reserved.</small>
 
 The TaskDialogLib is a thin wrapper library of the [Task Dialog Common Control](http://msdn.microsoft.com/en-us/library/windows/desktop/bb787471.aspx) introduced in Windows Vista for the .NET Framework and Windows Presentation Foundation. It allows you to declare task dialogs in XAML and define their logic in code-behind, including support for data binding with dependency properties and MVVM scenarios.
 
@@ -39,4 +39,4 @@ The TaskDialogLib can be build using the supplied command-line script files loca
 The TaskDialogLib is licensed and distributed under the terms of the GNU Lesser General Public License (LGPL), version 2.1. For more information, please see the file "License.txt" in the root of this distribution or visit <http://www.gnu.org/licenses/>.
 
 ----------
-<small>File: ReadMe.md, Last Update: April 5, 2014</small>
+<small>File: ReadMe.md, Last Update: April 7, 2014</small>
