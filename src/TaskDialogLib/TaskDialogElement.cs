@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************
  *
- *  TaskDialog Library
- *  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+ *  Flatcode Task Dialog Library
+ *  Copyright © 2014 Flatcode.net. All Rights Reserved.
  *
  *  File:
  *    TaskDialogElement.cs
@@ -31,7 +31,7 @@ using System.Windows;
 
 #endregion
 
-namespace TaskDialogLib
+namespace Flatcode.Presentation
 {
 	/// <summary>
 	/// Represents the base class for all task dialog elements.
@@ -40,7 +40,7 @@ namespace TaskDialogLib
 	{
 		#region Fields
 
-		WeakReference<TaskDialog> ownerReference;
+		WeakReference ownerReference;
 
 		#endregion
 
@@ -51,7 +51,6 @@ namespace TaskDialogLib
 		/// </summary>
 		protected TaskDialogElement()
 		{
-			ownerReference = null;
 		}
 
 		#endregion
@@ -63,21 +62,19 @@ namespace TaskDialogLib
 		/// </summary>
 		protected internal TaskDialog Owner {
 			get {
-				TaskDialog owner;
-
 				if (ownerReference != null) {
-					if (ownerReference.TryGetTarget(out owner)) {
-						return owner;
+					if (ownerReference.IsAlive) {
+						return ownerReference.Target as TaskDialog;
 					}
 				}
-				
+
 				return null;
 			}
 			set {
 				if (ownerReference == null) {
-					ownerReference = new WeakReference<TaskDialog>(value);
+					ownerReference = new WeakReference(value);
 				} else {
-					ownerReference.SetTarget(value);
+					ownerReference.Target = value;
 				}
 			}
 		}

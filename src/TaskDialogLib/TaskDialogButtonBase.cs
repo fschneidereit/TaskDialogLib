@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************
  *
- *  TaskDialog Library
- *  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+ *  Flatcode Task Dialog Library
+ *  Copyright © 2014 Flatcode.net. All Rights Reserved.
  *
  *  File:
  *    TaskDialogButtonBase.cs
@@ -32,7 +32,7 @@ using System.Windows.Markup;
 
 #endregion
 
-namespace TaskDialogLib
+namespace Flatcode.Presentation
 {
 	/// <summary>
 	/// Represents the base class for all task dialog buttons.

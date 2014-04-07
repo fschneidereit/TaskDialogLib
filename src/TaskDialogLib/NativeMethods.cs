@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************
  *
- *  TaskDialog Library
- *  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+ *  Flatcode Task Dialog Library
+ *  Copyright © 2014 Flatcode.net. All Rights Reserved.
  *
  *  File:
  *    NativeMethods.cs
@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace TaskDialogLib
+namespace Flatcode.Presentation
 {
 	static class NativeMethods
 	{
@@ -91,7 +91,7 @@ namespace TaskDialogLib
 			public Byte rgbReserved;
 		}
 
-		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 4)]
 		public class TASKDIALOGCONFIG
 		{
 			public UInt32 cbSize;
@@ -136,7 +136,7 @@ namespace TaskDialogLib
 			public UInt32 cxWidth;
 		}
 
-		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 4)]
 		public struct TASKDIALOG_BUTTON
 		{
 			public Int32 nButtonID;
@@ -325,7 +325,8 @@ namespace TaskDialogLib
 		[DllImport(
 			ExternDll.ComCtl32,
 			CallingConvention = CallingConvention.StdCall,
-			CharSet = CharSet.Auto)]
+			CharSet = CharSet.Auto,
+			PreserveSig = true)]
 		[return: MarshalAs(UnmanagedType.Error)]
 		public static extern Int32 DllGetVersion(
 			ref DLLVERSIONINFO pdvi);
@@ -352,7 +353,8 @@ namespace TaskDialogLib
 		[DllImport(
 			ExternDll.ComCtl32,
 			CallingConvention = CallingConvention.Winapi,
-			CharSet = CharSet.Auto)]
+			CharSet = CharSet.Auto,
+			PreserveSig = true)]
 		[return: MarshalAs(UnmanagedType.Error)]
 		public static extern Int32 TaskDialogIndirect(
 			[In] TASKDIALOGCONFIG pTaskConfig,

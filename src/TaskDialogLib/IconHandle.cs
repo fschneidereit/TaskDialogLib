@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************
  *
- *  TaskDialog Library
- *  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+ *  Flatcode Task Dialog Library
+ *  Copyright © 2014 Flatcode.net. All Rights Reserved.
  *
  *  File:
  *    IconHandle.cs
@@ -34,7 +34,7 @@ using System.Windows.Media.Imaging;
 
 #endregion
 
-namespace TaskDialogLib
+namespace Flatcode.Presentation
 {
 	sealed class IconHandle : SafeHandle
 	{

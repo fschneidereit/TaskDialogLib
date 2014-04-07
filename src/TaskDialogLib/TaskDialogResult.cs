@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************
  *
- *  TaskDialog Library
- *  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+ *  Flatcode Task Dialog Library
+ *  Copyright © 2014 Flatcode.net. All Rights Reserved.
  *
  *  File:
  *    TaskDialogResult.cs
@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 
 #endregion
 
-namespace TaskDialogLib
+namespace Flatcode.Presentation
 {
 	/// <summary>
 	/// Represents the result of a <see cref="TaskDialog"/> user interaction.

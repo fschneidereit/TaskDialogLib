@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************
  *
- *  TaskDialog Library
- *  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+ *  Flatcode Task Dialog Library
+ *  Copyright © 2014 Flatcode.net. All Rights Reserved.
  *
  *  File:
  *    AssemblyInfo.cs
@@ -36,8 +36,9 @@ using System.Windows.Markup;
 // General attributes
 [assembly: AssemblyTitle("TaskDialogLib")]
 [assembly: AssemblyDescription("TaskDialogLib")]
-[assembly: AssemblyProduct("TaskDialogLib")]
-[assembly: AssemblyCopyright("Copyright © 2014 Florian Schneidereit")]
+[assembly: AssemblyCompany("Flatcode.net")]
+[assembly: AssemblyProduct("Task Dialog Library")]
+[assembly: AssemblyCopyright("Copyright © 2014 Flatcode.net")]
 
 // Configuration attributes
 [assembly: CLSCompliant(true)]
@@ -50,9 +51,9 @@ using System.Windows.Markup;
 #endif
 
 // Presentation attributes
-[assembly: XmlnsDefinition("http://github.com/sevenacids/TaskDialogLib", "TaskDialogLib")]
-[assembly: XmlnsPrefix("http://github.com/sevenacids/TaskDialogLib", "tdl")]
+[assembly: XmlnsDefinition("http://schemas.flatcode.net/2014/presentation", "Flatcode.Presentation")]
+[assembly: XmlnsPrefix("http://schemas.flatcode.net/2014/presentation", "fcp")]
 
 // Versioning attributes
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0")]

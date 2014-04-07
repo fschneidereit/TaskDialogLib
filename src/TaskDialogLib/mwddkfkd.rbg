@@ -775,7 +775,7 @@ namespace Flatcode.Presentation
 
 				taskDialogConfig.hWndParent = wih.Handle;
 			}
-			
+
 			// Initialize flags
 			if (AllowCancellation) {
 				taskDialogConfig.dwFlags |=
@@ -924,7 +924,7 @@ namespace Flatcode.Presentation
 
 			// Initialize buttons
 			IntPtr buttonPtr = IntPtr.Zero;
-			
+
 			if (Buttons.Count != 0) {
 				// Allocate unmanaged memory for the button array
 				buttonPtr = Marshal.AllocHGlobal(
@@ -936,7 +936,7 @@ namespace Flatcode.Presentation
 				// Copy radio button data from managed list to unmanaged button array
 				foreach (TaskDialogButton button in Buttons) {
 					// Set owner
-					button.Owner = this;
+					//button.Owner = this;
 
 					// Create and initialize native wrapper structure
 					NativeMethods.TASKDIALOG_BUTTON btn = new NativeMethods.TASKDIALOG_BUTTON();
@@ -957,10 +957,10 @@ namespace Flatcode.Presentation
 			}
 
 			taskDialogConfig.nDefaultButton = DefaultButton;
-			
+
 			// Initialize radio buttons
 			IntPtr radioButtonPtr = IntPtr.Zero;
-			
+
 			if (RadioButtons.Count != 0) {
 				// Allocate unmanaged memory for the radio button array
 				radioButtonPtr = Marshal.AllocHGlobal(
@@ -972,7 +972,7 @@ namespace Flatcode.Presentation
 				// Copy radio button data from managed list to unmanaged button array
 				foreach (TaskDialogRadioButton radioButton in RadioButtons) {
 					// Set owner
-					radioButton.Owner = this;
+					//radioButton.Owner = this;
 
 					// Create and initialize native wrapper structure
 					NativeMethods.TASKDIALOG_BUTTON btn = new NativeMethods.TASKDIALOG_BUTTON();
@@ -993,7 +993,7 @@ namespace Flatcode.Presentation
 			}
 
 			taskDialogConfig.nDefaultRadioButton = DefaultRadioButton;
-			
+
 			// Present task dialog
 			Int32 selectedButton;
 			Int32 selectedRadioButton;

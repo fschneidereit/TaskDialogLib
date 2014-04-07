@@ -1,7 +1,7 @@
 ﻿<!--================================================================================================
 
-  TaskDialog Library
-  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+  Flatcode Task Dialog Library Test Application
+  Copyright © 2014 Flatcode.net. All Rights Reserved.
 
   File:
     AppWindow.xaml
@@ -26,7 +26,7 @@
 <Window x:Class="TaskDialogLibTest.AppWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="TaskDialog Library Test"
+        Title="Task Dialog Library Test"
         Height="300"
         Width="300"
         WindowStartupLocation="CenterScreen">

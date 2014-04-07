@@ -758,7 +758,7 @@ namespace Flatcode.Presentation
 			// Initialize task dialog configuration
 			NativeMethods.TASKDIALOGCONFIG taskDialogConfig = new NativeMethods.TASKDIALOGCONFIG();
 			taskDialogConfig.cbSize = (UInt32)Marshal.SizeOf(typeof(NativeMethods.TASKDIALOGCONFIG));
-			taskDialogConfig.hInstance = NativeMethods.GetModuleHandle();
+			/*taskDialogConfig.hInstance = NativeMethods.GetModuleHandle();
 			taskDialogConfig.pfCallback = TaskDialogProc;
 
 			Debug.Assert(taskDialogConfig.hInstance != IntPtr.Zero);
@@ -993,7 +993,7 @@ namespace Flatcode.Presentation
 			}
 
 			taskDialogConfig.nDefaultRadioButton = DefaultRadioButton;
-			
+			*/
 			// Present task dialog
 			Int32 selectedButton;
 			Int32 selectedRadioButton;
@@ -1009,13 +1009,13 @@ namespace Flatcode.Presentation
 				}
 			} finally {
 				// Clean up resources
-				if (radioButtonPtr != IntPtr.Zero) {
+				/*if (radioButtonPtr != IntPtr.Zero) {
 					Marshal.FreeHGlobal(radioButtonPtr);
 				}
 
 				if (buttonPtr != IntPtr.Zero) {
 					Marshal.FreeHGlobal(buttonPtr);
-				}
+				}*/
 
 				if (footerIconHandle != null) {
 					if (!footerIconHandle.IsClosed) {

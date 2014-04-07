@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************
  *
- *  TaskDialog Library
- *  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+ *  Flatcode Task Dialog Library Test Application
+ *  Copyright © 2014 Flatcode.net. All Rights Reserved.
  *
  *  File:
  *    App.xaml.cs

@@ -1,7 +1,7 @@
 ﻿/***************************************************************************************************
  *
- *  TaskDialog Library
- *  Copyright © 2014 Florian Schneidereit. All Rights Reserved.
+ *  Flatcode Task Dialog Library Test Application
+ *  Copyright © 2014 Flatcode.net. All Rights Reserved.
  *
  *  File:
  *    XamlTaskDialog.xaml.cs
@@ -27,24 +27,13 @@
 #region Using Directives
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 #endregion
 
 #region Using Directives: TaskDialogLib
 
-using TaskDialogLib;
+using Flatcode.Presentation;
 
 #endregion
 
@@ -52,9 +41,35 @@ namespace TaskDialogLibTest
 {
 	public partial class XamlTaskDialog : TaskDialog
 	{
+		#region Constructors
+
 		public XamlTaskDialog()
 		{
 			InitializeComponent();
 		}
+
+		#endregion
+
+		#region Methods: Event Handler
+
+		void Link1_Click(object sender, EventArgs e)
+		{
+			TaskDialogLink link = sender as TaskDialogLink;
+
+			if (link != null) {
+				MessageBox.Show(String.Format("Uri = {0}", link.Uri), "Link Clicked!");
+			}
+		}
+
+		void Button1_Click(object sender, EventArgs e)
+		{
+			TaskDialogButton button = sender as TaskDialogButton;
+
+			if (button != null) {
+				MessageBox.Show("Button 1 was clicked.", "Button Clicked!");
+			}
+		}
+
+		#endregion
 	}
 }
