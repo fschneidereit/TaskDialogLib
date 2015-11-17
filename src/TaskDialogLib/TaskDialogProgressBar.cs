@@ -91,18 +91,27 @@ namespace Flatcode.Presentation
 											                    CoerceValueProperty),
 																ValidateInt32TypeProperty);
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Events
 
-		/// <summary>
-		/// Gets or sets the marquee update interval of this <see cref="TaskDialogProgressBar"/>.
-		/// </summary>
-		/// <remarks>
-		/// The value of this property has no effect on this <see cref="TaskDialogProgressBar"/> if
-		/// the value of the <see cref="Style"/> property is not set to Marquee.
-		/// </remarks>
-		public Int32 MarqueeInterval {
+        /// <summary>
+        /// Occurs when the value of this <see cref="TaskDialogProgressBar"/> changed.
+        /// </summary>
+        public event EventHandler ValueChanged;
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the marquee update interval of this <see cref="TaskDialogProgressBar"/>.
+        /// </summary>
+        /// <remarks>
+        /// The value of this property has no effect on this <see cref="TaskDialogProgressBar"/> if
+        /// the value of the <see cref="Style"/> property is not set to Marquee.
+        /// </remarks>
+        public Int32 MarqueeInterval {
 			get { return marqueeInterval; }
 			set {
 				marqueeInterval = value;
@@ -171,11 +180,27 @@ namespace Flatcode.Presentation
 			set { SetValue(ValueProperty, value); }
 		}
 
-		#endregion
+        #endregion
 
-		#region Methods: Dependency Property Callbacks
+        #region Methods: Event Handler
 
-		static Object CoerceMaximumProperty(DependencyObject source, Object value)
+        /// <summary>
+        ///
+        /// </summary>
+        protected virtual void OnValueChanged()
+        {
+            EventHandler handler = ValueChanged;
+
+            if (handler != null) {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        #endregion
+
+        #region Methods: Dependency Property Callbacks
+
+        static Object CoerceMaximumProperty(DependencyObject source, Object value)
 		{
 			TaskDialogProgressBar progressBar = source as TaskDialogProgressBar;
 			Int32 maximum = (Int32)value;
@@ -338,12 +363,14 @@ namespace Flatcode.Presentation
 			if (progressBar != null) {
 				// Get progress bar owner task dialog
 				TaskDialog owner = progressBar.Owner;
-				
+
 				if (owner != null) {
 					// Send update message only if the owner task dialog has a progress bar and
 					// is activated
 					if (owner.HasProgressBar && owner.IsActivated) {
 						progressBar.SetProgressBarValue(value);
+                        // Notify value changed
+                        progressBar.OnValueChanged();
 					}
 				}
 			}

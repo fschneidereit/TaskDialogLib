@@ -45,7 +45,7 @@ namespace Flatcode.Presentation
 	/// </summary>
 	/// <remarks>
 	/// Like a <see cref="MessageBox"/>, a task dialog is formatted by the operating system
-	/// according to properties you set. However, it offers many more features than a message box. 
+	/// according to properties you set. However, it offers many more features than a message box.
 	/// </remarks>
 	[DefaultProperty("Content")]
 	[ContentProperty("Content")]
@@ -218,7 +218,7 @@ namespace Flatcode.Presentation
 		/// </summary>
 		public event EventHandler Collapsed {
 			add {
-				collapsedEventHandler = 
+				collapsedEventHandler =
 					(EventHandler)Delegate.Combine(collapsedEventHandler, value);
 			}
 			remove {
@@ -291,7 +291,7 @@ namespace Flatcode.Presentation
 
 		/// <summary>
 		/// Occurs when the state of the verification checkbox on this <see cref="TaskDialog"/>
-		/// changes. This event coincides with cases where the value of the 
+		/// changes. This event coincides with cases where the value of the
 		/// <see cref="IsVerificationChecked"/> property changes.
 		/// </summary>
 		public event EventHandler VerificationChanged {
@@ -569,9 +569,12 @@ namespace Flatcode.Presentation
 			set { SetValue(FooterIconProperty, value); }
 		}
 
-		internal IntPtr Handle {
+        /// <summary>
+        /// Gets the native handle of this <see cref="TaskDialog"/>.
+        /// </summary>
+		public IntPtr Handle {
 			get { return handle; }
-			set { handle = value; }
+			private set { handle = value; }
 		}
 
 		/// <summary>
@@ -766,7 +769,7 @@ namespace Flatcode.Presentation
 			// Check if the task dialog has an owner window
 			if (Owner != null) {
 				WindowInteropHelper wih = new WindowInteropHelper(Owner);
-				
+
 				if (wih.Handle == IntPtr.Zero) {
 					// Error: The owner window has either not been initialized or is closed.
 					throw new InvalidOperationException("The owner window has either not been " +
@@ -775,7 +778,7 @@ namespace Flatcode.Presentation
 
 				taskDialogConfig.hWndParent = wih.Handle;
 			}
-			
+
 			// Initialize flags
 			if (AllowCancellation) {
 				taskDialogConfig.dwFlags |=
@@ -924,14 +927,14 @@ namespace Flatcode.Presentation
 
 			// Initialize buttons
 			IntPtr buttonPtr = IntPtr.Zero;
-			
+
 			if (Buttons.Count != 0) {
 				// Allocate unmanaged memory for the button array
 				buttonPtr = Marshal.AllocHGlobal(
 					Marshal.SizeOf(typeof(NativeMethods.TASKDIALOG_BUTTON)) * Buttons.Count);
 
 				IntPtr offset = buttonPtr;
-				Int32 buttonID = 0;
+				Int32 buttonID = 16; // Start with 16 to avoid collision with common buttons
 
 				// Copy radio button data from managed list to unmanaged button array
 				foreach (TaskDialogButton button in Buttons) {
@@ -946,8 +949,7 @@ namespace Flatcode.Presentation
 					// Marshal to unmanaged memory
 					Marshal.StructureToPtr(btn, offset, false);
 
-					// Adjust offset and button ID
-					offset = (IntPtr)((Int32)offset + Marshal.SizeOf(btn));
+					offset = (IntPtr)((Int64)offset + Marshal.SizeOf(btn));
 					buttonID++;
 				}
 
@@ -957,10 +959,10 @@ namespace Flatcode.Presentation
 			}
 
 			taskDialogConfig.nDefaultButton = DefaultButton;
-			
+
 			// Initialize radio buttons
 			IntPtr radioButtonPtr = IntPtr.Zero;
-			
+
 			if (RadioButtons.Count != 0) {
 				// Allocate unmanaged memory for the radio button array
 				radioButtonPtr = Marshal.AllocHGlobal(
@@ -983,7 +985,7 @@ namespace Flatcode.Presentation
 					Marshal.StructureToPtr(btn, offset, false);
 
 					// Adjust offset and radio button ID
-					offset = (IntPtr)((Int32)offset + Marshal.SizeOf(btn));
+					offset = (IntPtr)((Int64)offset + Marshal.SizeOf(btn));
 					radioButtonID++;
 				}
 
@@ -993,16 +995,16 @@ namespace Flatcode.Presentation
 			}
 
 			taskDialogConfig.nDefaultRadioButton = DefaultRadioButton;
-			
+
 			// Present task dialog
 			Int32 selectedButton;
 			Int32 selectedRadioButton;
 			Boolean verificationChecked;
-			
+
 			hr = NativeMethods.TaskDialogIndirect(taskDialogConfig,
 												  out selectedButton, out selectedRadioButton,
 												  out verificationChecked);
-			try { 
+			try {
 				// Check HRESULT for errors
 				if (hr != NativeMethods.S_OK) {
 					Marshal.ThrowExceptionForHR(hr);
@@ -1029,7 +1031,7 @@ namespace Flatcode.Presentation
 					}
 				}
 			}
-			
+
 			return new TaskDialogResult(selectedButton, selectedRadioButton, verificationChecked);
 		}
 
@@ -1353,7 +1355,7 @@ namespace Flatcode.Presentation
 				handler(this, e);
 			}
 		}
-		
+
 		#endregion
 
 		#region Methods: Static
@@ -1579,22 +1581,31 @@ namespace Flatcode.Presentation
 					// Get button ID
 					Int32 buttonID = (Int32)wParam;
 
-					// Lookup button instance from collection, if necessary
-					if (Buttons.Count != 0 && buttonID < Buttons.Count) {
-						TaskDialogButton button = Buttons[buttonID];
+                    switch (buttonID) {
+                        case NativeMethods.IDOK:
+                        case NativeMethods.IDCANCEL:
+                        case NativeMethods.IDRETRY:
+                        case NativeMethods.IDYES:
+                        case NativeMethods.IDNO:
+                        case NativeMethods.IDCLOSE:
+                            break;
+                        default:
+                            if (Buttons.Count != 0) {
+						        TaskDialogButton button = Buttons[buttonID - 16];
 
-						// Raise Click event on button
-						button.RaiseClickEvent();
+						        // Raise Click event on button
+						        button.RaiseClickEvent();
 
-						// Does the button prevent the dialog from closing?
-						if (button.PreventClose) {
-							// Note: According to MSDN, one has to return E_FAIL to prevent the task
-							// dialog from closing, but actually you have to return S_FALSE as using
-							// E_FAIL will cause the task dialog function to fail.
-							result = NativeMethods.S_FALSE;
-						}
-					}
-
+						        // Does the button prevent the dialog from closing?
+						        if (button.PreventClose) {
+							        // Note: According to MSDN, one has to return E_FAIL to prevent the task
+							        // dialog from closing, but actually you have to return S_FALSE as using
+							        // E_FAIL will cause the task dialog function to fail.
+							        result = NativeMethods.S_FALSE;
+						        }
+					        }
+                            break;
+                    }
 					break;
 
 				case NativeMethods.TASKDIALOG_NOTIFICATIONS.TDN_CREATED:
