@@ -76,6 +76,9 @@ namespace Flatcode.Presentation
 		Boolean sizeToContent;
 		Boolean useDefaultIcon;
 		Boolean verificationChecked;
+		
+		// This needs to be a class member so that GC doesn't free it prematurely.
+		TaskDialogCallbackProc callback;
 
 		IconHandle iconHandle;
 		IconHandle footerIconHandle;
@@ -165,7 +168,7 @@ namespace Flatcode.Presentation
 
 		#endregion
 
-		#region Constructors
+		#region Constructors and Destructors
 
 		/// <summary>
 		/// Initializes a new instance of the TaskDialog class.
@@ -176,6 +179,14 @@ namespace Flatcode.Presentation
 			buttons = new TaskDialogElementCollection<TaskDialogButton>();
 			radioButtons = new TaskDialogElementCollection<TaskDialogRadioButton>();
 			useDefaultIcon = true;
+		}
+
+		/// <summary>
+		/// Cleans up the TaskDialog class.
+		/// </summary>
+		~TaskDialog()
+		{
+			callback = null;
 		}
 
 		#endregion
@@ -762,7 +773,7 @@ namespace Flatcode.Presentation
 			NativeMethods.TASKDIALOGCONFIG taskDialogConfig = new NativeMethods.TASKDIALOGCONFIG();
 			taskDialogConfig.cbSize = (UInt32)Marshal.SizeOf(typeof(NativeMethods.TASKDIALOGCONFIG));
 			taskDialogConfig.hInstance = NativeMethods.GetModuleHandle();
-			taskDialogConfig.pfCallback = TaskDialogProc;
+			taskDialogConfig.pfCallback = callback = TaskDialogProc;
 
 			Debug.Assert(taskDialogConfig.hInstance != IntPtr.Zero);
 
