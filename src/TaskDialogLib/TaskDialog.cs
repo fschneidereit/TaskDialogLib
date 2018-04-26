@@ -72,7 +72,6 @@ namespace Flatcode.Presentation
 		IntPtr handle;
 		Boolean initialized;
 		TaskDialogProgressBar progressBar;
-		Window owner;
 		Boolean sizeToContent;
 		Boolean useDefaultIcon;
 		Boolean verificationChecked;
@@ -645,10 +644,7 @@ namespace Flatcode.Presentation
 			}
 		}
 
-		internal Window Owner {
-			get { return owner; }
-			set { owner = value; }
-		}
+		internal object Owner { get; set; }
 
 		/// <summary>
 		/// Gets or sets the <see cref="TaskDialogProgressBar"/> of this <see cref="TaskDialog"/>.
@@ -766,18 +762,33 @@ namespace Flatcode.Presentation
 
 			Debug.Assert(taskDialogConfig.hInstance != IntPtr.Zero);
 
-			// Check if the task dialog has an owner window
-			if (Owner != null) {
-				WindowInteropHelper wih = new WindowInteropHelper(Owner);
+            // Check if the task dialog has an owner window
+            if (Owner != null)
+            {
+                IntPtr handle = IntPtr.Zero;
 
-				if (wih.Handle == IntPtr.Zero) {
-					// Error: The owner window has either not been initialized or is closed.
-					throw new InvalidOperationException("The owner window has either not been " +
-						                                "initialized or is closed.");
-				}
+                switch (this.Owner)
+                {
+                    // a WPF window
+                    case Window window:
+                        WindowInteropHelper wih = new WindowInteropHelper(window);
+                        break;
+                    
+                    // a Win32 form (such as from Windows Forms)
+                    case IntPtr ptr:
+                        handle = ptr;
+                        break;
+                }
 
-				taskDialogConfig.hWndParent = wih.Handle;
-			}
+                if (handle == IntPtr.Zero)
+                {
+                    // Error: The owner window has either not been initialized or is closed.
+                    throw new InvalidOperationException("The owner window has either not been " +
+                                                        "initialized or is closed.");
+                }
+
+                taskDialogConfig.hWndParent = handle;
+            }
 
 			// Initialize flags
 			if (AllowCancellation) {
@@ -1039,10 +1050,10 @@ namespace Flatcode.Presentation
 		/// Displays this <see cref="TaskDialog"/> in front of the specified window and returns
 		/// when it is closed.
 		/// </summary>
-		/// <param name="owner">A <see cref="Window"/> that represents the owner of this task
+		/// <param name="owner">A <see cref="Window"/> or <see cref="IntPtr"/> that represents the owner of this task
 		/// dialog.</param>
 		/// <returns>A <see cref="TaskDialogResult"/> value that represents result data.</returns>
-		public TaskDialogResult ShowModal(Window owner)
+		public TaskDialogResult ShowModal(object owner)
 		{
 			// Validate argument
 			if (owner == null) {
@@ -1451,97 +1462,97 @@ namespace Flatcode.Presentation
 			return taskDialog.Show();
 		}
 
-		/// <summary>
-		/// Displays a <see cref="TaskDialog"/> in front of the specified window.
-		/// </summary>
-		/// <param name="owner">A <see cref="Window"/> that represents the owner window of the
-		/// task dialog.</param>
-		/// <param name="instruction">A <see cref="String"/> that specifies the instruction text
-		/// to display.</param>
-		/// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
-		/// was selected by the user.</returns>
-		public static TaskDialogResult ShowModal(Window owner, String instruction)
+        /// <summary>
+        /// Displays a <see cref="TaskDialog"/> in front of the specified window.
+        /// </summary>
+        /// <param name="owner">A <see cref="Window"/> or <see cref="IntPtr"/> that represents the owner of this task
+        /// dialog.</param>
+        /// <param name="instruction">A <see cref="String"/> that specifies the instruction text
+        /// to display.</param>
+        /// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
+        /// was selected by the user.</returns>
+        public static TaskDialogResult ShowModal(object owner, String instruction)
 		{
 			return ShowModal(owner, instruction, null, null, TaskDialogButtons.None,
 				              TaskDialogIcon.None);
 		}
 
-		/// <summary>
-		/// Displays a <see cref="TaskDialog"/> in front of the specified window.
-		/// </summary>
-		/// <param name="owner">A <see cref="Window"/> that represents the owner window of the
-		/// task dialog.</param>
-		/// <param name="instruction">A <see cref="String"/> that specifies the instruction text
-		/// to display.</param>
-		/// <param name="content">A <see cref="String"/> that specifies the content text to
-		/// display.</param>
-		/// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
-		/// was selected by the user.</returns>
-		public static TaskDialogResult ShowModal(Window owner, String instruction, String content)
+        /// <summary>
+        /// Displays a <see cref="TaskDialog"/> in front of the specified window.
+        /// </summary>
+        /// <param name="owner">A <see cref="Window"/> or <see cref="IntPtr"/> that represents the owner of this task
+        /// dialog.</param>
+        /// <param name="instruction">A <see cref="String"/> that specifies the instruction text
+        /// to display.</param>
+        /// <param name="content">A <see cref="String"/> that specifies the content text to
+        /// display.</param>
+        /// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
+        /// was selected by the user.</returns>
+        public static TaskDialogResult ShowModal(object owner, String instruction, String content)
 		{
 			return ShowModal(owner, instruction, content, null, TaskDialogButtons.None,
 							  TaskDialogIcon.None);
 		}
 
-		/// <summary>
-		/// Displays a <see cref="TaskDialog"/> in front of the specified window.
-		/// </summary>
-		/// <param name="owner">A <see cref="Window"/> that represents the owner window of the
-		/// task dialog.</param>
-		/// <param name="instruction">A <see cref="String"/> that specifies the instruction text
-		/// to display.</param>
-		/// <param name="content">A <see cref="String"/> that specifies the content text to
-		/// display.</param>
-		/// <param name="title">A <see cref="String"/> that specifies the title bar text of the
-		/// task dialog.</param>
-		/// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
-		/// was selected by the user.</returns>
-		public static TaskDialogResult ShowModal(Window owner, String instruction, String content,
+        /// <summary>
+        /// Displays a <see cref="TaskDialog"/> in front of the specified window.
+        /// </summary>
+        /// <param name="owner">A <see cref="Window"/> or <see cref="IntPtr"/> that represents the owner of this task
+        /// dialog.</param>
+        /// <param name="instruction">A <see cref="String"/> that specifies the instruction text
+        /// to display.</param>
+        /// <param name="content">A <see cref="String"/> that specifies the content text to
+        /// display.</param>
+        /// <param name="title">A <see cref="String"/> that specifies the title bar text of the
+        /// task dialog.</param>
+        /// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
+        /// was selected by the user.</returns>
+        public static TaskDialogResult ShowModal(object owner, String instruction, String content,
 			                                     String title)
 		{
 			return ShowModal(owner, instruction, content, title, TaskDialogButtons.None,
 							  TaskDialogIcon.None);
 		}
 
-		/// <summary>
-		/// Displays a <see cref="TaskDialog"/> in front of the specified window.
-		/// </summary>
-		/// <param name="owner">A <see cref="Window"/> that represents the owner window of the
-		/// task dialog.</param>
-		/// <param name="instruction">A <see cref="String"/> that specifies the instruction text
-		/// to display.</param>
-		/// <param name="content">A <see cref="String"/> that specifies the content text to
-		/// display.</param>
-		/// <param name="title">A <see cref="String"/> that specifies the title bar text of the
-		/// task dialog.</param>
-		/// <param name="buttons">A <see cref="TaskDialogButtons"/> value that specifies which
-		/// buttons to display.</param>
-		/// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
-		/// was selected by the user.</returns>
-		public static TaskDialogResult ShowModal(Window owner, String instruction, String content,
+        /// <summary>
+        /// Displays a <see cref="TaskDialog"/> in front of the specified window.
+        /// </summary>
+        /// <param name="owner">A <see cref="Window"/> or <see cref="IntPtr"/> that represents the owner of this task
+        /// dialog.</param>
+        /// <param name="instruction">A <see cref="String"/> that specifies the instruction text
+        /// to display.</param>
+        /// <param name="content">A <see cref="String"/> that specifies the content text to
+        /// display.</param>
+        /// <param name="title">A <see cref="String"/> that specifies the title bar text of the
+        /// task dialog.</param>
+        /// <param name="buttons">A <see cref="TaskDialogButtons"/> value that specifies which
+        /// buttons to display.</param>
+        /// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
+        /// was selected by the user.</returns>
+        public static TaskDialogResult ShowModal(object owner, String instruction, String content,
 			                                     String title, TaskDialogButtons buttons)
 		{
 			return ShowModal(owner, instruction, content, title, buttons, TaskDialogIcon.None);
 		}
 
-		/// <summary>
-		/// Displays a <see cref="TaskDialog"/> in front of the specified window.
-		/// </summary>
-		/// <param name="owner">A <see cref="Window"/> that represents the owner window of the
-		/// task dialog.</param>
-		/// <param name="instruction">A <see cref="String"/> that specifies the instruction text
-		/// to display.</param>
-		/// <param name="content">A <see cref="String"/> that specifies the content text to
-		/// display.</param>
-		/// <param name="title">A <see cref="String"/> that specifies the title bar text of the
-		/// task dialog.</param>
-		/// <param name="buttons">A <see cref="TaskDialogButtons"/> value that specifies which
-		/// buttons to display.</param>
-		/// <param name="icon">A <see cref="TaskDialogIcon"/> value that specifies the icon to
-		/// display.</param>
-		/// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
-		/// was selected by the user.</returns>
-		public static TaskDialogResult ShowModal(Window owner, String instruction, String content,
+        /// <summary>
+        /// Displays a <see cref="TaskDialog"/> in front of the specified window.
+        /// </summary>
+        /// <param name="owner">A <see cref="Window"/> or <see cref="IntPtr"/> that represents the owner of this task
+        /// dialog.</param>
+        /// <param name="instruction">A <see cref="String"/> that specifies the instruction text
+        /// to display.</param>
+        /// <param name="content">A <see cref="String"/> that specifies the content text to
+        /// display.</param>
+        /// <param name="title">A <see cref="String"/> that specifies the title bar text of the
+        /// task dialog.</param>
+        /// <param name="buttons">A <see cref="TaskDialogButtons"/> value that specifies which
+        /// buttons to display.</param>
+        /// <param name="icon">A <see cref="TaskDialogIcon"/> value that specifies the icon to
+        /// display.</param>
+        /// <returns>A <see cref="TaskDialogResult"/> value that specifies which common button
+        /// was selected by the user.</returns>
+        public static TaskDialogResult ShowModal(object owner, String instruction, String content,
 			                                     String title, TaskDialogButtons buttons,
 			                                     TaskDialogIcon icon)
 		{
