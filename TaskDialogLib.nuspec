@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>TaskDialogLib</id>
+    <version>1.1.0.0</version>
+    <title>TaskDialogLib</title>
+    <authors>Florian Schneidereit</authors>
+    <owners>Flatcode.net</owners>
+    <licenseUrl>http://opensource.org/licenses/LGPL-2.1</licenseUrl>
+    <projectUrl>http://github.com/flatcode/TaskDialogLib</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The TaskDialogLib is a thin wrapper library of the native Task Dialog Common Control introduced in Windows Vista for the .NET Framework and Windows Presentation Foundation. It allows you to declare task dialogs in XAML and define their logic in code-behind, including support for data binding with dependency properties.</description>
+    <summary>A free and open source library for XAML-based Task Dialogs.</summary>
+    <releaseNotes>Ownership changed: TaskDialogLib is now being maintained by flatcode. Please note that in the course of this the XAML namespace changed from "http://github.com/sevenacids/TaskDialogLib" to "http://schemas.flatcode.net/2014/presentation".
+
+For a quick walkthrough how to use this library, see the CodeProject article: http://www.codeproject.com/Articles/751921/Introducing-TaskDialogLib-Task-Dialogs-in-XAML</releaseNotes>
+    <copyright>Copyright © 2014 Flatcode.net.</copyright>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="PresentationCore" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="PresentationFramework" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="System.Xaml" targetFramework=".NETFramework4.0" />
+      <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework4.0" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
