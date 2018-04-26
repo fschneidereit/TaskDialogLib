@@ -51,7 +51,7 @@ namespace Flatcode.Presentation
 		/// Indentifies the <see cref="Description"/> dependency property.
 		/// </summary>
 		public static readonly DependencyProperty DescriptionProperty =
-			DependencyProperty.Register("Description", typeof(String), typeof(TaskDialogButton),
+			DependencyProperty.Register("Description", typeof(Object), typeof(TaskDialogButton),
 										new PropertyMetadata(null));
 
 		#endregion
@@ -82,8 +82,8 @@ namespace Flatcode.Presentation
 		/// The value of this property has no effect if the <see cref="TaskDialogButtonStyle"/> of
 		/// the owner task dialog is set to Normal.
 		/// </remarks>
-		public String Description {
-			get { return GetValue(DescriptionProperty) as String; }
+		public Object Description {
+			get { return GetValue(DescriptionProperty) as Object; }
 			set { SetValue(DescriptionProperty, value); }
 		}
 

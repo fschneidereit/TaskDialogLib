@@ -38,6 +38,11 @@
     <Compile Include="ExternDll.cs" />
     <Compile Include="IconHandle.cs" />
     <Compile Include="ITaskDialogHost.cs" />
+    <Compile Include="TaskDialogButtonDescription.cs" />
+    <Compile Include="TaskDialogButtonDescriptionElement.cs" />
+    <Compile Include="TaskDialogButtonDescriptionElementCollection.cs" />
+    <Compile Include="TaskDialogButtonDescriptionRun.cs" />
+    <Compile Include="TaskDialogButtonDescriptionLineBreak.cs" />
     <Compile Include="TaskDialogLineBreak.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
