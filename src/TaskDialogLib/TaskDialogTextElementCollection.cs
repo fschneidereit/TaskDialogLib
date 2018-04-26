@@ -78,8 +78,16 @@ namespace Flatcode.Presentation
 		/// third-party code.</returns>
 		protected internal override Int32 AddInternal(Object item)
 		{
-			if (item is String) {
-				item = new TaskDialogRun((String)item);
+			if (item is String s) {
+                /*
+                 * XAML will coalesce all whitespace into a single space. If
+                 * there are no non-whitespace characters, ignore this part.
+                 */
+                if (s == " ")
+                    return -1;
+
+                // if there _is_ a non-whitespace character, create a new Run.
+				item = new TaskDialogRun(s);
 			}
 
 			return base.AddInternal(item);
