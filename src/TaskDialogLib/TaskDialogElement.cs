@@ -28,6 +28,7 @@
 
 using System;
 using System.Windows;
+using System.Windows.Markup;
 
 #endregion
 
@@ -36,6 +37,7 @@ namespace Flatcode.Presentation
 	/// <summary>
 	/// Represents the base class for all task dialog elements.
 	/// </summary>
+    [RuntimeNameProperty(nameof(Name))]
 	public abstract class TaskDialogElement : DependencyObject
 	{
 		#region Fields
@@ -57,10 +59,23 @@ namespace Flatcode.Presentation
 
 		#region Properties
 
-		/// <summary>
-		/// Gets or sets the owner <see cref="TaskDialog"/> of this <see cref="TaskDialogElement"/>.
-		/// </summary>
-		protected internal TaskDialog Owner {
+
+        private static readonly DependencyProperty NameProperty =
+            DependencyProperty.Register(nameof(Name), typeof(string), typeof(TaskDialogElement));
+
+        /// <summary>
+        /// The name of this <see cref="TaskDialogElement"/>.
+        /// </summary>        
+        public string Name
+        {
+            get => (string)GetValue(NameProperty);
+            set => SetValue(NameProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the owner <see cref="TaskDialog"/> of this <see cref="TaskDialogElement"/>.
+        /// </summary>
+        protected internal TaskDialog Owner {
 			get {
 				if (ownerReference != null) {
 					if (ownerReference.IsAlive) {
