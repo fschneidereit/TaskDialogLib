@@ -23,4 +23,7 @@ For a quick walkthrough how to use this library, see the CodeProject article: ht
       <frameworkAssembly assemblyName="WindowsBase" targetFramework=".NETFramework4.0" />
     </frameworkAssemblies>
   </metadata>
+	<files>
+		<file src="bin\Release\TaskDialogLib.dll" target="lib\net40\TaskDialogLib.dll" />
+	</files>
 </package>
