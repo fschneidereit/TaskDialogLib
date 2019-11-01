@@ -75,9 +75,9 @@ namespace Flatcode.Presentation
 		Boolean sizeToContent;
 		Boolean useDefaultIcon;
 		Boolean verificationChecked;
-		
-		// This needs to be a class member so that GC doesn't free it prematurely.
-		TaskDialogCallbackProc callback;
+
+        // This needs to be a class member so that GC doesn't free it prematurely.
+        NativeMethods.TaskDialogCallbackProc callback;
 
 		IconHandle iconHandle;
 		IconHandle footerIconHandle;
