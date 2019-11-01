@@ -860,6 +860,7 @@ namespace Flatcode.Presentation
                     // a WPF window
                     case Window window:
                         WindowInteropHelper wih = new WindowInteropHelper(window);
+                        handle = wih.Handle;
                         break;
 
                     // a Win32 form (such as from Windows Forms)
